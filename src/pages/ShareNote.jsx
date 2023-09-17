@@ -13,7 +13,7 @@ const ShareNote = () => {
 
   const copyToClipboard = (text) => {
     const clipboard = new ClipboardJS(".copy-button", {
-      text: () => "localhost:3000/" + text,
+      text: () => "https://vnotess.netlify.app/" + text,
     });
   };
 
