@@ -26,7 +26,7 @@ const ShareNote = () => {
         content: note,
         url: url,
       });
-      await navigator.clipboard.writeText("localhost:3000/" + url);
+      await navigator.clipboard.writeText("https://vnotess.netlify.app/" + url);
       setGeneratedURL(url);
       copyToClipboard(url);
       setLoading(false);
@@ -54,7 +54,7 @@ const ShareNote = () => {
               <>
                 <div className="mr-4">
                   <span className="ml-2 cursor-pointer">
-                    {"localhost:3000/" + generatedURL}
+                    {"https://vnotess.netlify.app/" + generatedURL}
                   </span>
                 </div>
                 <button
