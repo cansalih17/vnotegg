@@ -22,7 +22,7 @@ const ShortUrlHandler = () => {
           const doc = querySnapshot.docs[0];
           const data = doc.data();
           setNoteContent(data.content);
-          
+
           contentEditableRef.current.focus();
         } else {
           setError("Not bulunamadı veya geçersiz URL");
@@ -38,7 +38,7 @@ const ShortUrlHandler = () => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="p-8 w-full">
+      <div className="py-8 w-full">
         <h2 className="text-2xl font-semibold mb-4">Kısa URL Notu</h2>
 
         {error ? (

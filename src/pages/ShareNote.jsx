@@ -5,15 +5,20 @@ import { collection, addDoc } from "firebase/firestore";
 import ClipboardJS from "clipboard";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import useAuth from "../custom-hooks/useAuth";
 
 const ShareNote = () => {
   const [note, setNote] = useState("");
   const [generatedURL, setGeneratedURL] = useState("");
   const [isLoading, setLoading] = useState(false);
 
+  const [baseURL, setBaseURL] = useState("http://localhost:3000/");
+
+  const { currentUser } = useAuth();
+
   const copyToClipboard = (text) => {
     const clipboard = new ClipboardJS(".copy-button", {
-      text: () => "https://vnotess.netlify.app/" + text,
+      text: () => baseURL + text,
     });
   };
 
@@ -25,8 +30,9 @@ const ShareNote = () => {
       const docRef = await addDoc(collection(firestore, "notes"), {
         content: note,
         url: url,
+        email: currentUser.email,
       });
-      await navigator.clipboard.writeText("https://vnotess.netlify.app/" + url);
+      await navigator.clipboard.writeText(baseURL + url);
       setGeneratedURL(url);
       copyToClipboard(url);
       setLoading(false);
@@ -36,45 +42,43 @@ const ShareNote = () => {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="p-8 w-full">
-        <div className="flex justify-between items-center mb-4">
-          <button
-            onClick={handleShare}
-            className={` text-white rounded px-4 py-2  ${
-              isLoading
-                ? "bg-gray-500 cursor-not-allowed"
-                : "bg-blue-500 hover:bg-blue-600"
-            }`}
-          >
-            {isLoading ? "Paylaşılıyor" : "Paylaş"}
-          </button>
-          <div className="flex items-center">
-            {generatedURL && (
-              <>
-                <div className="mr-4">
-                  <span className="ml-2 cursor-pointer">
-                    {"https://vnotess.netlify.app/" + generatedURL}
-                  </span>
-                </div>
-                <button
-                  onClick={() => copyToClipboard(generatedURL)}
-                  className="bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600 ml-auto copy-button"
-                >
-                  Kopyala
-                </button>
-              </>
-            )}
-          </div>
+    <div className="py-8">
+      <div className="mb-4 flex justify-between items-center">
+        <button
+          onClick={handleShare}
+          className={` text-white rounded px-4 py-2  ${
+            isLoading
+              ? "bg-gray-500 cursor-not-allowed"
+              : "bg-blue-500 hover:bg-blue-600"
+          }`}
+        >
+          {isLoading ? "Paylaşılıyor" : "Paylaş"}
+        </button>
+        <div className="flex items-center">
+          {generatedURL && (
+            <>
+              <div className="mr-4">
+                <span className="ml-2 cursor-pointer">
+                  {baseURL + generatedURL}
+                </span>
+              </div>
+              <button
+                onClick={() => copyToClipboard(generatedURL)}
+                className="bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600 ml-auto copy-button"
+              >
+                Kopyala
+              </button>
+            </>
+          )}
         </div>
-
-        <ReactQuill
-          theme="snow"
-          value={note}
-          onChange={setNote}
-          style={{ height: "500px" }}
-        />
       </div>
+
+      <ReactQuill
+        theme="snow"
+        value={note}
+        onChange={setNote}
+        style={{ height: "500px" }}
+      />
     </div>
   );
 };

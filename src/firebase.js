@@ -1,21 +1,16 @@
 import { initializeApp } from "firebase/app";
-import {getAuth} from 'firebase/auth' //Giriş için
-import {getFirestore} from 'firebase/firestore' //veritabanı işlemleri için
-import {getStorage} from 'firebase/storage' //dosya yükleme için
-
-
+import { getAuth } from "firebase/auth"; //Giriş için
+import { getFirestore } from "firebase/firestore"; //veritabanı işlemleri için
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCzy9wygHqRSppjhisrQ0aJgMILJDc8Qog",
-    authDomain: "blogapp-d0eb4.firebaseapp.com",
-    projectId: "blogapp-d0eb4",
-    storageBucket: "blogapp-d0eb4.appspot.com",
-    messagingSenderId: "892291201091",
-    appId: "1:892291201091:web:6847f8cd94dee2a4d1fcf6"
+  apiKey: "AIzaSyBpdKVIiy7fDEE9_L5wXRnyTKTMcVCIq50",
+  authDomain: "noteapp-2789d.firebaseapp.com",
+  projectId: "noteapp-2789d",
+  storageBucket: "noteapp-2789d.appspot.com",
+  messagingSenderId: "598436670269",
+  appId: "1:598436670269:web:5cf40680f427d446daf354",
 };
 
-
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app)
-export const firestore = getFirestore(app)
-export const storage = getStorage(app)
+export const auth = getAuth(app);
+export const firestore = getFirestore(app);
