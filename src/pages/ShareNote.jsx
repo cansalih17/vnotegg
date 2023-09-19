@@ -16,6 +16,8 @@ const ShareNote = () => {
 
   const { currentUser } = useAuth();
 
+  const email = currentUser ? currentUser.email : "";
+
   const copyToClipboard = (text) => {
     const clipboard = new ClipboardJS(".copy-button", {
       text: () => baseURL + text,
@@ -30,7 +32,7 @@ const ShareNote = () => {
       const docRef = await addDoc(collection(firestore, "notes"), {
         content: note,
         url: url,
-        email: currentUser.email,
+        email: email,
       });
       await navigator.clipboard.writeText(baseURL + url);
       setGeneratedURL(url);
