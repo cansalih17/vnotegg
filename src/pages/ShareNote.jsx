@@ -12,7 +12,7 @@ const ShareNote = () => {
   const [generatedURL, setGeneratedURL] = useState("");
   const [isLoading, setLoading] = useState(false);
 
-  const [baseURL, setBaseURL] = useState("http://localhost:3000/");
+  const [baseURL, setBaseURL] = useState("https://vnotess.netlify.app/");
 
   const { currentUser } = useAuth();
 

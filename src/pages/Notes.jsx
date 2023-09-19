@@ -21,7 +21,7 @@ const Notes = () => {
 
   const navigate = useNavigate();
 
-  const [baseURL, setBaseURL] = useState("http://localhost:3000/");
+  const [baseURL, setBaseURL] = useState("https://vnotess.netlify.app/");
 
   function truncateText(html, maxLength) {
     const tempDiv = document.createElement("div");
